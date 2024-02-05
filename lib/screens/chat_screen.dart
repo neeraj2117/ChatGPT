@@ -1,9 +1,9 @@
+import 'package:ChatGPT/providers/active_theme_provider.dart';
+import 'package:ChatGPT/screens/login.dart';
+import 'package:ChatGPT/widgets/theme_switch.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gpt_flutter/providers/active_theme_provider.dart';
-import 'package:gpt_flutter/screens/login.dart';
-import 'package:gpt_flutter/widgets/theme_switch.dart';
 import '../providers/chats_provider.dart';
 import '../widgets/chat_item.dart';
 import '../widgets/text_field.dart';

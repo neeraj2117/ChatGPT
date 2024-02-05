@@ -47,7 +47,7 @@ class _TextAndVoiceFieldState extends ConsumerState<TextAndVoiceField> {
               cursorColor: Theme.of(context).colorScheme.onPrimary,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(25),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
@@ -62,7 +62,7 @@ class _TextAndVoiceFieldState extends ConsumerState<TextAndVoiceField> {
           ),
         ),
         const SizedBox(
-          width: 06,
+          width: 13,
         ),
         ToggleButton(
           isReplying: _isReplying,

@@ -30,8 +30,10 @@ class ChatItem extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               color: isMe
-                  ? Theme.of(context).colorScheme.secondary
-                  : Colors.grey.shade800,
+                  // ? Theme.of(context).colorScheme.secondary
+                  // : Colors.grey.shade800,
+                  ? Colors.green[800]
+                  : Colors.purple[900],
               borderRadius: BorderRadius.only(
                 topLeft: const Radius.circular(15),
                 topRight: const Radius.circular(15),
@@ -66,17 +68,15 @@ class ProfileContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      width: 40,
-      height: 40,
+      width: 35,
+      height: 35,
       decoration: BoxDecoration(
-        color: isMe
-            ? Theme.of(context).colorScheme.secondary
-            : Colors.grey.shade800,
+        color: isMe ? Colors.green.shade800 : Colors.purple.shade900,
         borderRadius: BorderRadius.only(
           topLeft: const Radius.circular(10),
           topRight: const Radius.circular(10),
-          bottomLeft: Radius.circular(isMe ? 0 : 15),
-          bottomRight: Radius.circular(isMe ? 15 : 0),
+          bottomLeft: Radius.circular(isMe ? 0 : 10),
+          bottomRight: Radius.circular(isMe ? 10 : 0),
         ),
       ),
       child: Icon(

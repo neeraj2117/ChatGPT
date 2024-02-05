@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'text_field.dart';
 
 class ToggleButton extends StatefulWidget {
@@ -25,17 +26,21 @@ class _ToggleButtonState extends State<ToggleButton> {
       style: ElevatedButton.styleFrom(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         foregroundColor: Theme.of(context).colorScheme.onSecondary,
-        shape: const CircleBorder(),
-        padding: const EdgeInsets.all(15),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(35),
+        ),
+        padding: const EdgeInsets.only(top: 0),
       ),
       onPressed: widget._isReplying
           ? null
           : widget._inputMode == InputMode.text
               ? widget._sendTextMessage
               : null,
-      child: const Icon(
-        Icons.send,
-      ),
+      // child: const Icon(
+      //   Icons.send_outlined,
+      //   size: 30,
+      // ),
+      child: Lottie.asset("assets/images/send1.json", height: 65),
     );
   }
 }

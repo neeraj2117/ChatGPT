@@ -1,9 +1,12 @@
+import 'package:ChatGPT/screens/chat_screen.dart';
+import 'package:ChatGPT/screens/signup.dart';
+import 'package:ChatGPT/services/ui_helper.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gpt_flutter/screens/chat_screen.dart';
-import 'package:gpt_flutter/screens/signup.dart';
-import 'package:gpt_flutter/services/ui_helper.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -16,33 +19,76 @@ class _LoginState extends State<Login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool _obscureText = true;
+  bool isLoading = false;
+
+  // login(String email, String password) async {
+  //   if (email == "" && password == "") {
+  //     return UiHelper.CustomAlertBox(context, "Enter required fields");
+  //   } else {
+  //     UserCredential? usercredential;
+  //     try {
+  //       usercredential = await FirebaseAuth.instance
+  //           .signInWithEmailAndPassword(email: email, password: password);
+  //       // ignore: use_build_context_synchronously
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         const SnackBar(
+  //           content: Text("Successfully logged in!"),
+  //           duration: Duration(seconds: 1),
+  //         ),
+  //       );
+  //       // ignore: use_build_context_synchronously
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (context) => const ChatScreen(),
+  //         ),
+  //       );
+  //     } on FirebaseAuthException catch (e) {
+  //       // ignore: use_build_context_synchronously
+  //       return UiHelper.CustomAlertBox(context, e.code.toString());
+  //     }
+  //   }
+  // }
 
   login(String email, String password) async {
     if (email == "" && password == "") {
-      return UiHelper.CustomAlertBox(context, "Enter required fields");
+      UiHelper.CustomAlertBox(context, "Enter required fields");
     } else {
+      // Show circular progress indicator
+      setState(() {
+        isLoading = true;
+      });
+
       UserCredential? usercredential;
 
       try {
         usercredential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: email, password: password);
-        // ignore: use_build_context_synchronously
+
+        // Show success snackbar
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("Successfully logged in!"),
-            duration: Duration(seconds: 1),
+            duration: Duration(seconds: 5),
           ),
         );
-        // ignore: use_build_context_synchronously
-        Navigator.push(
+
+        // Wait for 2 seconds
+        await Future.delayed(Duration(seconds: 2));
+
+        // Navigate to home screen
+        Navigator.pushReplacement(
           context,
-          MaterialPageRoute(
-            builder: (context) => const ChatScreen(),
-          ),
+          MaterialPageRoute(builder: (context) => ChatScreen()),
         );
       } on FirebaseAuthException catch (e) {
-        // ignore: use_build_context_synchronously
-        return UiHelper.CustomAlertBox(context, e.code.toString());
+        // Show error alert
+        UiHelper.CustomAlertBox(context, e.code.toString());
+      } finally {
+        // Hide circular progress indicator
+        setState(() {
+          isLoading = false;
+        });
       }
     }
   }
@@ -51,20 +97,52 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Login Page",
-          style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.w600,
+        title: FadeInDown(
+          delay: const Duration(milliseconds: 900),
+          duration: const Duration(milliseconds: 1000),
+          child: Text(
+            "Login Page",
+            style: GoogleFonts.montserrat(
+              fontSize: 29,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         centerTitle: true,
+        // leading: FadeInDown(
+        //   delay: const Duration(milliseconds: 900),
+        //   duration: const Duration(milliseconds: 900),
+        //   child: IconButton(
+        //     icon: const Icon(Icons.arrow_back_ios_new_rounded),
+        //     onPressed: () {
+        //       Navigator.pop(context);
+        //     },
+        //   ),
+        // ),
       ),
       body: Column(
         children: [
-          Image.asset('assets/images/logo.png'),
+          FadeInDown(
+            delay: const Duration(milliseconds: 800),
+            duration: const Duration(milliseconds: 900),
+            child: Lottie.asset("assets/images/login.json", height: 370),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 330.0),
+            child: FadeInDown(
+              delay: const Duration(milliseconds: 700),
+              duration: const Duration(milliseconds: 800),
+              child: const Text(
+                'Email',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
           const SizedBox(
-            height: 60,
+            height: 3,
           ),
           UiHelper.CustomTextField(
             emailController,
@@ -75,21 +153,62 @@ class _LoginState extends State<Login> {
           const SizedBox(
             height: 20,
           ),
+          Padding(
+            padding: const EdgeInsets.only(right: 300.0),
+            child: FadeInDown(
+              delay: const Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 600),
+              child: const Text(
+                'Password',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 3,
+          ),
           UiHelper.CustomPasswordField(
             passwordController,
             'Enter your password',
           ),
           const SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 30.0),
+                child: FadeInDown(
+                  delay: const Duration(milliseconds: 400),
+                  duration: const Duration(milliseconds: 500),
+                  child: const Text(
+                    'Forgot Password ?',
+                    style: TextStyle(
+                      color: Color(0xFF835DF1),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
             height: 70,
           ),
-          UiHelper.CustomButton(() {
-            login(
-              emailController.text.toString(),
-              passwordController.text.toString(),
-            );
-          }, 'Login'),
+          isLoading
+              ? CircularProgressIndicator()
+              : UiHelper.CustomButton(() {
+                  login(
+                    emailController.text.toString(),
+                    passwordController.text.toString(),
+                  );
+                }, 'Login'),
           const SizedBox(
-            height: 20,
+            height: 10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -103,10 +222,16 @@ class _LoginState extends State<Login> {
                     ),
                   );
                 },
-                child: Text(
-                  'Dont have an account?',
-                  style: TextStyle(
-                      color: Colors.blue[400], fontWeight: FontWeight.w500),
+                child: FadeInUp(
+                  delay: const Duration(milliseconds: 400),
+                  duration: const Duration(milliseconds: 500),
+                  child: const Text(
+                    'Don\'t have an account ?',
+                    style: TextStyle(
+                      color: Color(0xFF835DF1),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
               ),
             ],
