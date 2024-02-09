@@ -18,7 +18,8 @@ class _ThemeSwitchState extends ConsumerState<ThemeSwitch> {
   @override
   Widget build(BuildContext context) {
     return Switch.adaptive(
-      activeColor: Theme.of(context).colorScheme.secondary,
+      // activeColor: Theme.of(context).colorScheme.secondary,
+      activeColor: Color(0xFFE78895),
       value: ref.watch(activeThemeProvider) == Themes.dark,
       onChanged: toggleTheme,
     );
