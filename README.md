@@ -18,7 +18,6 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 >>>>>>> initial commit
-![Simulator Screenshot - iPhone 15 Pro Max - 2024-02-03 at 21 52 41](https://github.com/neeraj2117/ChatGPT/assets/103667909/0364c72f-fcf8-4bee-95f6-8a01505dbb92)
 ![Simulator Screenshot - iPhone 15 Pro Max - 2024-02-03 at 21 52 51](https://github.com/neeraj2117/ChatGPT/assets/103667909/109bbdd1-17b3-4f18-a78d-727470e78698)
 ![Simulator Screenshot - iPhone 15 Pro Max - 2024-02-03 at 21 53 07](https://github.com/neeraj2117/ChatGPT/assets/103667909/74b98fbf-4476-43b2-99af-03d57823395e)
 ![Simulator Screenshot - iPhone 15 Pro Max - 2024-02-03 at 21 53 12](https://github.com/neeraj2117/ChatGPT/assets/103667909/b81d8ca4-110c-4b52-83e1-b744ae464425)
